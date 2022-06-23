@@ -19,7 +19,7 @@ Might change with time. :)
 ## Running (locally/cloud)
 
 ```bash
-git clone git@github.com:Lightning-AI/Code-Editor-App.git && cd Code-Editor-App
+git clone git@github.com:Lightning-AI/LAI-CodeRunner-App.git && cd LAI-CodeRunner-App
 pip install lightning
 # Locally
 lightning run app app.py
@@ -30,7 +30,7 @@ lightning run app app.py --cloud
 ## Development (Building)
 
 ```bash
-git clone git@github.com:Lightning-AI/Code-Editor-App.git && cd Code-Editor-App
+git clone git@github.com:Lightning-AI/LAI-CodeRunner-App.git && cd LAI-CodeRunner-App
 pip install lightning
 cd ui/ && yarn install && yarn build
 # To just test the UI:
