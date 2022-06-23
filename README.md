@@ -1,3 +1,7 @@
+## Demo
+
+Latest demo: https://01g685vn5feeappfbtvncnpjyh.litng-ai-03.litng.ai/view/React%20UI
+
 ## Milestone v0.1 Tracker
 
 All the issues are tracked here: https://github.com/Lightning-AI/Code-Editor-App/issues/1.
