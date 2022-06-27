@@ -25,44 +25,20 @@ self.MonacoEnvironment = {
 };
 
 
+
+// export const HandleEvents = (editor: monaco.editor.IStandaloneCodeEditor, e: MouseEvent<HTMLButtonElement>) => {
+// }
 let editor: monaco.editor.IStandaloneCodeEditor;
-
-const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-	HandleEvents(editor, e);
-}
-
-const HandleEvents = (editor: monaco.editor.IStandaloneCodeEditor, e: MouseEvent<HTMLButtonElement>) => {
-	const { lightningState, updateLightningState } = useLightningState();
-	const id = e.currentTarget.id;
-	if (id == "submit_button") {
-		let code = editor.getValue();
-		console.log("Code before: " + code);
-
-		/* Now update the var in lightning state */
-		if (lightningState) {
-			console.log("Code: " + code);
-			const newLightningState = cloneDeep(lightningState);
-			newLightningState.flows.code_editor.vars.code = code;
-			updateLightningState(newLightningState);
-		}
-
-		const element = document.createElement("a");
-		const file = new Blob([code], {type: 'text/plain'});
-		element.href = URL.createObjectURL(file);
-		element.download = "myFile.py";
-		document.body.appendChild(element); // Required for this to work in FireFox
-		element.click();
-	}
-}
 
 
 export const Editor: React.FC = () => {
 	const divEl = useRef<HTMLDivElement>(null);
+	const { lightningState, updateLightningState } = useLightningState();
 	useEffect(() => {
 		if (divEl.current) {
 			editor = monaco.editor.create(divEl.current, {
 				// value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-				value: ["def input(img):", "\t# Play with your image here", "\treturn img"].join("\n"),
+				value: ["import cv2\n", "def input_frame(img):", "\t# Play with your image here", "\treturn img"].join("\n"),
 				theme: 'vs-dark',
 				language: 'python',
 				// scrollbar: {
@@ -85,6 +61,30 @@ export const Editor: React.FC = () => {
 			editor.dispose();
 		};
 	}, []);
+	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+		console.log("Button clicked...");
+		const id = e.currentTarget.id;
+		if (id == "submit_button") {
+			let code = editor.getValue();
+			console.log("Code before: " + code);
+
+			/* Now update the var in lightning state */
+			if (lightningState) {
+				console.log("Code: " + code);
+				const newLightningState = cloneDeep(lightningState);
+				newLightningState.flows.code_editor.vars.code = code;
+				// newLightningState.flows.code_editor.vars.run_again = 1;
+				updateLightningState(newLightningState);
+			}
+
+			const element = document.createElement("a");
+			const file = new Blob([code], {type: 'text/plain'});
+			element.href = URL.createObjectURL(file);
+			element.download = "myFile.py";
+			document.body.appendChild(element); // Required for this to work in FireFox
+			element.click();
+		}
+	}
 	return (
 		<div>
 			<div className="Editor" ref={divEl}></div>
