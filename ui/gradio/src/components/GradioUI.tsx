@@ -7,7 +7,7 @@ import { useLightningState } from "../hooks/useLightningState";
 export const GradioUI: React.FC = () => {
 	const { lightningState } = useLightningState();
 
-	let url: string = "";
+	let url: string = "https://cdn11.bigcommerce.com/s-5d127/images/stencil/1280x1280/products/781/1383/FS72927-24__72706__76945.1560535870.jpg";
 	let navigate = useNavigate();
 
 	function getURL() {

@@ -59,9 +59,12 @@ class HelloLitReact(L.LightningFlow):
 
     def run(self):
         if self.code_editor.code != "":
+            self.gradio_work.close()
             self.code_editor.run()
             self.gradio_flow.run()
             self.gradio_work.run(self.code_editor.script_path, self.code_editor.code)
+            with open("logs.txt", "w+") as _file:
+                _file.write("check if it's working")
             self.code_editor.clear()
 
     def configure_layout(self):
