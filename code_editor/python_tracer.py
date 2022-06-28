@@ -61,7 +61,7 @@ class PythonTracer(TracerPythonScript):
     def run(self, drive, script_path, img):
         self.script_path = script_path
         self.output_path = self.script_path.strip(".py") + "_output.png"
-        drive.put(self.script_path)
+        drive.get(self.script_path)
         ast_checker = ASTChecker(self.script_path, expectations=self.expected_symbol)
         was_found = ast_checker.runme()
         if not was_found:
