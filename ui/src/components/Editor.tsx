@@ -2,7 +2,8 @@ import React, { useRef, useEffect, MouseEvent } from 'react';
 import * as monaco from 'monaco-editor';
 import cloneDeep from "lodash/cloneDeep";
 
-import { useLightningState } from "/home/krshrimali/Documents/Projects/Lightning-AI/lightning-apps/LAI-CodeRunner-App/ui/src/hooks/useLightningState";
+// import { useLightningState } from "/home/krshrimali/Documents/Projects/Lightning-AI/lightning-apps/LAI-CodeRunner-App/ui/src/hooks/useLightningState";
+import { useLightningState } from "../hooks/useLightningState";
 
 
 // @ts-ignore
@@ -38,25 +39,15 @@ export const Editor: React.FC = () => {
 		if (divEl.current) {
 			editor = monaco.editor.create(divEl.current, {
 				// value: ['function x() {', '\tconsole.log("Hello world!");', '}'].join('\n'),
-				value: ["import cv2\n", "def input_frame(img):", "\t# Play with your image here", "\treturn img"].join("\n"),
+				value: [
+					"import cv2\n# Add your imports here",
+					"\ndef requirements():",
+					"\t# Append the modules you want to install here", "\treturn ['opencv-python-headless==4.5.5.64', 'numpy']",
+					"\ndef input_frame(img):", "\t# This function is a must, please play with your image here and return the output", "\treturn img"].join("\n"),
 				theme: 'vs-dark',
 				language: 'python',
-				// scrollbar: {
-				// 	alwaysConsumeMouseWheel: true,
-				// },
 			});
 		}
-
-		// const parent = placeholder.parentElement
-
-		// window.addEventListener("resize", () => {
-		// 	editor.layout({ width: 0, height: 0 })
-
-		// 	window.requestAnimationFrame(() => {
-		// 		const rect = parent.getBoundingClientRect()
-		// 		editor.layout({ width: rect.width, height: rect.height })
-		// 	})
-		// })
 		return () => {
 			editor.dispose();
 		};

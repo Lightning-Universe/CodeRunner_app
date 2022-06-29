@@ -17,27 +17,6 @@ class Visitor(ast.NodeTransformer):
             self.found_it = True
 
 
-# class ASTChecker:
-#     def __init__(self, script_path: str, expectations: str) -> None:
-#         self.expectations = expectations
-#         self.script_path = script_path
-#         self.visitor = Visitor(self.expectations)
-#         self.content = []
-
-#     # @staticmethod
-#     # def read_file(script_path):
-#     #     lines = []
-#     #     with open(script_path, 'r') as _file:
-#     #         lines = _file.readlines()
-#     #     return lines
-
-#     def runme(self):
-#         self.content = ASTChecker.read_file(self.script_path)
-#         tree = ast.parse(''.join(self.content))
-#         self.visitor.visit(tree)
-#         return self.visitor.found_it
-
-
 class PythonTracer(TracerPythonScript):
     def __init__(self, content, script_path: str, script_args: Optional[Union[list, str]] = None, expected_symbol: str = None, **kwargs):
         super().__init__(script_path, script_args, **kwargs)
@@ -62,7 +41,10 @@ class PythonTracer(TracerPythonScript):
     def _modify_script(self, img_path):
         content = self._read_file()
         append_sys = [
-            # "import sys\n",
+            "\nimport os\n",
+            "to_install = requirements()\n",
+            "for req in to_install:\n",
+            "    os.system(f'pip install {req}')\n",
             "\nif __name__ == '__main__':\n",
             f"    img = cv2.imread('{img_path}')\n",
             "    output_img = input_frame(img)\n"
@@ -80,9 +62,6 @@ class PythonTracer(TracerPythonScript):
         self.script_content = content
         self.script_path = script_path
         self.output_path = self.script_path.strip(".py") + "_output.png"
-        # drive.get(self.script_path)
-        # ast_checker = ASTChecker(content, self.script_path, expectations=self.expected_symbol)
-        # was_found = ast_checker.runme()
         was_found = self._ast_parse()
         if not was_found:
             raise ValueError(f"Expected a function with name {self.expected_symbol} in the given code at {self.script_path}")

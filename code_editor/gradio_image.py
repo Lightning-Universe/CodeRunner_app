@@ -25,8 +25,6 @@ class GradioImage(L.LightningWork):
         with open(self.script_path, "w+") as _file:
             _file.write(script_content + "\n")
         self._script_runner = PythonTracer(self.script_content, self.script_path, expected_symbol="input_frame")
-        with open("log.txt", "a") as _file:
-            _file.write("Uhmmm, restarting now...\n")
         if start_gradio:
             interface = gr.Interface(
                 fn=self._apply,
