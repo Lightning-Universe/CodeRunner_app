@@ -1,6 +1,6 @@
 ## Demo
 
-Latest demo: https://01g685vn5feeappfbtvncnpjyh.litng-ai-03.litng.ai/view/React%20UI
+Latest demo: https://01g6pzdffmp6ma1rjk9xzncxhb.litng-ai-03.litng.ai/view/React%20UI
 
 ## Milestone v0.1 Tracker
 
