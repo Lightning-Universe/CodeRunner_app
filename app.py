@@ -1,4 +1,5 @@
 import random
+import os
 
 from pathlib import Path
 
@@ -20,8 +21,6 @@ class YourComponent(L.LightningFlow):
     def generate_script_from_code(self):
         file_id = int(random.random() * 100)
         self.script_path = f"script_{file_id}.py"
-        # with open(self.script_path, "a") as _file:
-        #     _file.write(self.code + '\n')
 
     def run(self):
         if self.script_path is None:
@@ -56,16 +55,19 @@ class HelloLitReact(L.LightningFlow):
         self.code_editor = YourComponent()
         self.gradio_flow = GradioFlow()
         self.gradio_work = GradioImage()
+        self.counter = 0
 
     def run(self):
         if self.code_editor.code != "":
-            self.gradio_work.close()
             self.code_editor.run()
             self.gradio_flow.run()
-            self.gradio_work.run(self.code_editor.script_path, self.code_editor.code)
-            with open("logs.txt", "w+") as _file:
-                _file.write("check if it's working")
+            if self.counter != 0:
+                self.gradio_work.run(self.code_editor.script_path, self.code_editor.code, start_gradio=False)
+            else:
+                self.gradio_work.run(self.code_editor.script_path, self.code_editor.code, start_gradio=True)
             self.code_editor.clear()
+            self.gradio_work.close()
+            self.counter += 1
 
     def configure_layout(self):
         return [
