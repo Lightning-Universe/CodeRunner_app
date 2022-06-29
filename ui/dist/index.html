@@ -2,10 +2,12 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Monaco Editor Sample</title>
 	<script defer src="app.bundle.js"></script><script defer src="editor.worker.bundle.js"></script><script defer src="json.worker.bundle.js"></script><script defer src="css.worker.bundle.js"></script><script defer src="html.worker.bundle.js"></script><script defer src="ts.worker.bundle.js"></script></head>
 	<body>
-		<div id="root">
-		</div>
+		<div id="root"></div>
+		<script type="module" src="/src/index.tsx"></script>
+		<script src="https://storage.googleapis.com/grid-packages/lightning-ui/v0.0.0/LightningState.js"></script>
 	</body>
 </html>

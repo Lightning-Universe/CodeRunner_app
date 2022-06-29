@@ -52,7 +52,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebPackPlugin({
-			template: 'src/index.html'
+			template: 'index.html'
 		}),
 		isDevelopment && new ReactRefreshWebpackPlugin()
 	].filter(Boolean)
