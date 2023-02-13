@@ -1,11 +1,8 @@
 import random
-import os
-
 from pathlib import Path
 
 import lightning as L
 from lightning.app.frontend import StaticWebFrontend
-from lightning.app.storage import Drive
 
 from code_editor.gradio_image import GradioImage
 
@@ -70,10 +67,7 @@ class HelloLitReact(L.LightningFlow):
             self.counter += 1
 
     def configure_layout(self):
-        return [
-            {"name": "React UI", "content": self.code_editor},
-            {"name": "Gradio Demo", "content": self.gradio_flow}
-        ]
+        return [{"name": "React UI", "content": self.code_editor}, {"name": "Gradio Demo", "content": self.gradio_flow}]
 
 
 app = L.LightningApp(HelloLitReact())
