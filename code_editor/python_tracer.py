@@ -81,5 +81,6 @@ class PythonTracer(TracerPythonScript):
 
     def on_after_run(self, res: Any):
         output_img = res["output_img"]
-        # TODO: Should this happen in the script itself? [can't access drive then, maybe? or can get the output path from res]
+        # TODO: Should this happen in the script itself?
+        #  [can't access drive then, maybe? or can get the output path from res]
         cv2.imwrite(self.output_path, output_img)
