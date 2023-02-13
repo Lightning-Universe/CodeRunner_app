@@ -11,8 +11,8 @@ All the issues are tracked here: https://github.com/Lightning-AI/Code-Editor-App
 Here is how the initial goal for this app looked like:
 
 1. One work will have the editor running, they'll have a template with a class method having an input as a frame coming from the webcam -- they are free to play around with it, write the code, and return the modified frame.
-2. Click submit, and demo!
-3. It can be served with gradio - and the next tab will show the input video, as well as the output video frame by frame.
+1. Click submit, and demo!
+1. It can be served with gradio - and the next tab will show the input video, as well as the output video frame by frame.
 
 Might change with time. :)
 
@@ -39,4 +39,3 @@ yarn start
 # Else just run the app
 cd ../ && lightning run app app.py
 ```
-
